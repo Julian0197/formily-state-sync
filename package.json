@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "commit": "git add . && czg"
+    "commit": "czg"
   },
   "peerDependencies": {
     "@formily/core": "^2.0.0",
     "@formily/reactive": "^2.0.0",
-    "zustand": "^4.0.0"
+    "zustand": "^4.0.0",
+    "immer": "^10.0.0",
+    "jotai": "^2.0.0",
+    "jotai-immer": "^0.4.0"
   },
   "keywords": [],
   "author": "",

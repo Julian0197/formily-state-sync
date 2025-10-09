@@ -1,6 +1,7 @@
 import { Form } from '@formily/core'
+import { Atom } from 'jotai'
 
-export interface FormSlice<
+export interface FormZustandSlice<
   T extends Record<string, any>,
   D extends Record<string, any>
 > {
@@ -17,5 +18,18 @@ export interface FormSlice<
   /** Reset form state */
   resetFormState: () => void
   /** Remount form instance */
+  remountForm: () => void
+}
+
+export interface FormJotaiSlice<
+  T extends Record<string, any>,
+  D extends Record<string, any>
+> {
+  formInsAtom: Atom<Form<T>>
+  formDataAtom: Atom<T>
+  extraDataAtom: Atom<D>
+  syncFormAndStore: () => void
+  stopSyncFormAndStore?: () => void
+  resetFormState: () => void
   remountForm: () => void
 }
