@@ -2,23 +2,51 @@
   "name": "formily-state-sync",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "commit": "czg"
+    "commit": "czg",
+    "build": "rimraf dist && rollup -c",
+    "dev:examples": "pnpm --filter ./examples dev",
+    "preview:examples": "pnpm --filter ./examples preview"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./adapters": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": "./dist/index.d.ts",
+    "./utils": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
   },
   "peerDependencies": {
     "@formily/core": "^2.0.0",
     "@formily/reactive": "^2.0.0",
-    "zustand": "^4.0.0",
-    "immer": "^10.0.0",
+    "immer": "^9.0.0",
     "jotai": "^2.0.0",
-    "jotai-immer": "^0.4.0"
+    "jotai-immer": "^0.4.0",
+    "zustand": "^4.0.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "czg": "^1.12.0",
-    "rollup": "^4.52.4"
+    "rimraf": "^6.0.1",
+    "rollup": "^4.52.4",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.6.2"
   }
 }

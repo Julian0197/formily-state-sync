@@ -1,0 +1,59 @@
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.grid {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 260px;
+  max-width: 420px;
+  padding: 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+}
+
+.card.active {
+  box-shadow: 0 0 0 2px #1677ff;
+}
+
+.sectionTitle {
+  font-size: 12px;
+  color: #666;
+  margin: 8px 0 4px;
+}
+
+.fieldCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+}
+
+.jsonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.jsonCard {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 12px;
+}

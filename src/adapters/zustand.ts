@@ -6,6 +6,7 @@ import {
   onFormUnmount,
 } from '@formily/core'
 import { toJS } from '@formily/reactive'
+import { Draft } from 'immer';
 import { createUniqueKey } from '../utils'
 
 export const createFormZustandAdapter = <
@@ -17,7 +18,7 @@ export const createFormZustandAdapter = <
 ) =>
   immer<FormZustandSlice<T, D>>((set, get, api) => ({
     formIns: createForm<T>({
-      values: initialFormData,
+      initialValues: initialFormData,
     }),
     formData: initialFormData,
     extraData: initialExtraData,
@@ -36,7 +37,8 @@ export const createFormZustandAdapter = <
           return
         }
         const { formData, formIns } = state
-        formIns.values = { ...formData }
+        console.log('store -> form\n', formData)
+        formIns.setValues({ ...formData })
       })
 
       const syncEffectKey = createUniqueKey()
@@ -44,7 +46,9 @@ export const createFormZustandAdapter = <
       // form (input change) => store
       const handleFormInputValueChange = () => {
         onFieldInputValueChange('*', () => {
+          console.log(toJS(get().formIns.values as any), '999')
           isFormTriggered = true
+          console.log('form -> store\n', get().formIns.values)
           set((draft) => {
             draft.formData = toJS(get().formIns.values as any)
           })
@@ -70,9 +74,9 @@ export const createFormZustandAdapter = <
     },
     resetFormState: () => {
       set((draft) => {
-        draft.formData = initialFormData
-        draft.extraData = initialExtraData
-        // reset form values, effects and validate rules (by formily)
+        draft.formData = initialFormData as Draft<T>
+        draft.extraData = initialExtraData as Draft<D>
+      // reset form values, effects and validate rules (by formily)
         draft.formIns.reset()
         draft.formIns.clearFormGraph()
       })
